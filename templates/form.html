@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="TemplateMo">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+    <title>Finance Business HTML5 Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="static/css/fontawesome.css">
+    <link rel="stylesheet" href="static/css/templatemo-finance-business.css">
+    <link rel="stylesheet" href="static/css/owl.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  </head>
+
+  <body>
+
+
+
+    <!-- Header -->
+    <div class="sub-header">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-xs-12">
+            <ul class="left-info">
+              <li class="welcome">Καλωσήρθες</li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <ul class="right-icons">
+              <li><a href="{{ url_for('home') }}"><i class="fa fa-phone"></i> 6934661792</a></li>
+              <li><a href="https://www.facebook.com/profile.php?id=100088539315723" target="_blank"><i class="fa fa-facebook"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/dimitris-tziavras-52a232202" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand navbar-heading" href="/"><h2>ΤΖΙΑΒΡΑΣ ΔΗΜΗΤΡΗΣ, <span class="navbar-subheading" style="color: #a4c639">ΕΠΕΝΔΥΤΙΚΟΣ ΚΑΙ ΑΣΦΑΛΙΣΤΙΚΟΣ ΣΥΜΒΟΥΛΟΣ</span><span class="navbar-subsubheading" style="color: #a4c639"> ΝΝ HELLAS</span></h2></a>
+        </div>
+      </nav>
+    </header>
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="main-banner header-text" id="top">
+  <div class="Modern-Slider">
+    <div class="item item-3">
+      <div class="img-fill">
+        <div class="text-content">
+          <div class="container">
+            <div class="row justify-content-center align-items-center">
+              <div class="col-md-8">
+                <div class="signup-form-wrapper" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; height: 500px; overflow-y: auto; margin-top: 50px;">
+                  <div class="text-center">
+                    <h6 style="color: #a4c639;">Αξιολογηση Επενδυτικου προφιλ</h6>
+                  </div>
+                  <form action="{{ url_for('home') }}" method="POST" class="question-form">
+                    {{ question_form.hidden_tag() }}
+                      <div class="form-group">
+                        <label for="not_member_name">{{ question_form.not_member_name.label }}</label>
+                        {{ question_form.not_member_name(class_='form-control') }}
+                      </div>
+                      <div class="form-group">
+                        <label for="not_member_email">{{ question_form.not_member_email.label }}</label>
+                        {{ question_form.not_member_email(class_='form-control') }}
+                      </div>
+                      <div class="form-group">
+                        <label for="not_member_phone">{{ question_form.not_member_phone.label }}</label>
+                        {{ question_form.not_member_phone(class_='form-control') }}
+                      </div>
+                    {% for i in range(1, 8) %}
+                      <div class="form-group">
+                        <label for="question{{ i }}">{{ question_form['question' ~ i].label }}</label>
+                        {{ question_form['question' ~ i](class_='form-control', id='question' ~ i) }}
+                        {% for error in question_form['question' ~ i].errors %}
+                          <span class="error">{{ error }}</span>
+                        {% endfor %}
+                      </div>
+                    {% endfor %}
+                    <div class="form-group text-center">
+                      {{ question_form.submit(class_='btn btn-primary', style='background-color: #a4c639; border-color: #a4c639;') }}
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <!-- Banner Ends Here -->
+
+    <div class="services">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Financial <em>Services</em></h2>
+              <span>Εξατομικευμενα προγραμματα για τις αναγκες σας</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-item">
+              <img src="static/images/service_03.jpg" alt="">
+              <div class="down-content">
+                <h4>Επένδυση διαθέσιμων κεφαλαίων</h4>
+                <p>Με γνώμονα το επενδυτικό σας προφίλ και στόχους, τοποθετούμε τα κεφάλαια σας στην παγκόσμια αγορά και σε Αμοιβαία Κεφάλαια με υψηλές προσδωκόμενες αποδόσεις.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-item">
+              <img src="static/images/service_02.jpg" alt="">
+              <div class="down-content">
+                <h4>Κάλυψη σπουδών</h4>
+                <p>Υπολογισμός του κόστους φοίτησης για Ελλάδα & Εξωτερικό. Δημιουργία κεφαλαίου από μηδενική βάση με στόχο την κάλυψη των εξόδων για την φοίτηση των παιδιών σας.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="service-item">
+              <img src="static/images/service_01.jpg" alt="">
+              <div class="down-content">
+                <h4>Εξασφάλιση Συμπληρωματικής Σύνταξης</h4>
+                <p>Με το πρόβλημα των συντάξεων να γιγαντώνεται ολοένα και περισσότερο, κρίνεται επιτακτικό να προνοήσουμε για το χτίσιμο της δικής μας ιδιωτικής σύνταξης. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fun-facts">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="left-content">
+              <span>Ανακαλυψτε τις καλυτερες ασφαλιστικες λυσεις</span>
+              <h2>Οι λύσεις μας <em>για όλες τις ανάγκες σας</em></h2>
+              <p> Μέσω της ευρείας γκάμας των υπηρεσιών μας, σας βοηθούμε να αποκτήσετε ασφάλεια και προστασία σε διάφορους τομείς της ζωής σας.
+
+Είμαι πάντα διαθέσιμος για να σας συμβουλεύσω και να εξηγήσω τις διάφορες επιλογές που σας προσφέρουμε.
+              <br><br> Από ασφάλειες υγείας και ζωής μέχρι επενδυτικά και αποταμιευτικά προγράμματα,
+
+γενικές ασφάλειες, όπως αυτοκίνητα, ταξίδια, αστική ευθύνη και άλλες, σας προσφέρουμε την απαραίτητη προστασία σε περιπτώσεις απρόβλεπτων συμβάντων.
+
+Επιπλέον, μπορούμε να σας βοηθήσουμε με την ασφάλιση της υγείας των κατοικιδίων σας, για να διασφαλίσουμε ότι οι αγαπημένοι σας φίλοι θα έχουν την καλύτερη περίθαλψη σε περίπτωση ανάγκης.</p>
+            </div>
+          </div>
+          <div class="col-md-6 align-self-center">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-title">Ασφαλίσεις Υγείας</div>
+                  <div class="count-title">& Ζωής</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-title">Επενδυτικά</div>
+                  <div class="count-title">& Αποταμιευτικά προγράμματα</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-title">Γενικές Ασφαλίσεις</div>
+                  <div class="count-title">(Αυτοκινήτων, Ταξιδιωτικές, Αστικής Ευθύνης κλπ.)</div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="count-area-content">
+                  <div class="count-title">Ασφάλιση Υγείας</div>
+                  <div class="count-title">κατοικιδίων συντροφιάς</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="more-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="more-info-content">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="left-image">
+                    <img src="static/images/more-info.jpg" alt="">
+                  </div>
+                </div>
+                <div class="col-md-6 align-self-center">
+                  <div class="right-content">
+                    <span>Ποιοι ειμαστε</span>
+                    <h2>Γνωρίστε <em>την εταιρία μας</em></h2>
+                    <p>Curabitur pulvinar sem a leo tempus facilisis. Sed non sagittis neque. Nulla conse quat tellus nibh, id molestie felis sagittis ut. Nam ullamcorper tempus ipsum in cursus<br><br>Praes end at dictum metus. Morbi id hendrerit lectus, nec dapibus ex. Etiam ipsum quam, luctus eu egestas eget, tincidunt</p>
+                    <a href="https://www.nnhellas.gr/" target="_blank" class="filled-button">More info</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callback-form">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Request a <em>call back</em></h2>
+              <span>συντομα θα επικοινωνησω μαζι σας</span>
+            </div>
+          </div>
+          <div class="col-md-12">
+  <div class="contact-form">
+    <form id="contact" action="{{ url_for('home') }}" method="post">
+      {{ form.csrf_token }}
+      {% with messages = get_flashed_messages() %}
+              {% if messages %}
+         <div class="flash-messages right-align">
+                  {% for message in messages %}
+        <div class="flash-message">{{ message }}</div>
+                  {% endfor %}
+    </div>
+              {% endif %}
+          {% endwith %}
+      <div class="row">
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <fieldset>
+            {{ form.fullname(class_='form-control', placeholder='Full Name') }}
+          </fieldset>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <fieldset>
+            {{ form.email(class_='form-control', placeholder='E-Mail Address') }}
+          </fieldset>
+        </div>
+        <div class="col-lg-4 col-md-12 col-sm-12">
+          <fieldset>
+            {{ form.phone(class_='form-control', placeholder='Phone') }}
+          </fieldset>
+        </div>
+        <div class="col-lg-12">
+          <fieldset>
+            {{ form.message(class_='form-control', placeholder='Your Message', rows='6') }}
+          </fieldset>
+        </div>
+        <div class="col-lg-12">
+          <fieldset>
+                  <button type="submit" id="form-submit" class="border-button">
+                      <span>{{ form.submit.label }}</span>
+                  </button>
+          </fieldset>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Starts Here -->
+
+    <div class="sub-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p>Copyright &copy; Tziavras Dimitris 2023 Financial and Insurance advisor, NN Hellas.
+
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/vendor/jquery/jquery.min.js"></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Additional Scripts -->
+    <script src="static/js/custom.js"></script>
+    <script src="static/js/owl.js"></script>
+    <script src="static/js/slick.js"></script>
+    <script src="static/js/accordions.js"></script>
+
+    <script language = "text/Javascript">
+      cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+      function clearField(t){                   //declaring the array outside of the
+      if(! cleared[t.id]){                      // function makes it static and global
+          cleared[t.id] = 1;  // you could use true and false, but that's more typing
+          t.value='';         // with more chance of typos
+          t.style.color='#fff';
+          }
+      }
+    </script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    $("#contact-me-button").click(function() {
+      $(".request-form").slideUp(300, function() {
+        $("#contact-form-container").slideDown(300);
+      });
+    });
+  });
+</script>
+
+  </body>
+</html>

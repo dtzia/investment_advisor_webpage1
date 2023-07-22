@@ -1,4 +1,3 @@
-import sqlalchemy
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_wtf import FlaskForm

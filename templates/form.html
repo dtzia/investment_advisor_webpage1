@@ -63,7 +63,21 @@
           <div class="container">
             <div class="row justify-content-center align-items-center">
               <div class="col-md-8">
+                <div id="question-section">
                 <div class="signup-form-wrapper" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; height: 500px; overflow-y: auto; margin-top: 50px;">
+                  {% if submit_question %}
+                {% with messages = get_flashed_messages(category_filter="question_form") %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="flash-message alert alert-{{ category }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+                {% endif %}
                   <div class="text-center">
                     <h6 style="color: #a4c639;">Αξιολογηση Επενδυτικου προφιλ</h6>
                   </div>
@@ -230,8 +244,10 @@
               <span>συντομα θα επικοινωνησω μαζι σας</span>
             </div>
           </div>
+          <div id="contact-section">
           <div class="col-md-12">
-            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if submit_contact %}
+            {% with messages = get_flashed_messages(category_filter="contact_form") %}
         {% if messages %}
             <div class="flash-messages">
                 {% for category, message in messages %}
@@ -242,8 +258,9 @@
             </div>
         {% endif %}
     {% endwith %}
+            {% endif %}
   <div class="contact-form">
-    <form id="contact" action="{{ url_for('home') }}" method="post">
+    <form id="contact" action="{{ url_for('home') }}" method="post" data-url="{{ url_for('home') }}">
       {{ form.csrf_token }}
       <div class="row">
         <div class="col-lg-4 col-md-12 col-sm-12">
@@ -315,16 +332,6 @@
       }
     </script>
 
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $("#contact-me-button").click(function() {
-      $(".request-form").slideUp(300, function() {
-        $("#contact-form-container").slideDown(300);
-      });
-    });
-  });
-</script>
 
   </body>
 </html>

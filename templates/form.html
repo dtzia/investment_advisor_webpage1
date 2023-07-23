@@ -63,6 +63,7 @@
           <div class="container">
             <div class="row justify-content-center align-items-center">
               <div class="col-md-8">
+                <a id="question-form"></a>
                 <div class="signup-form-wrapper" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; height: 500px; overflow-y: auto; margin-top: 50px;">
                   {% if submit %}
                 {% with messages = get_flashed_messages(with_categories=true) %}
@@ -243,6 +244,7 @@
               <span>συντομα θα επικοινωνησω μαζι σας</span>
             </div>
           </div>
+          <a id="contact-form"></a>
           <div class="col-md-12">
             {% if not submit %}
             {% with messages = get_flashed_messages(with_categories=true) %}

@@ -1,3 +1,5 @@
+import os
+
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template, request, url_for, redirect, flash, send_from_directory
 from flask_wtf import FlaskForm
@@ -7,8 +9,7 @@ from wtforms.validators import DataRequired, Email, InputRequired
 app = Flask(__name__)
 
 #CREATE USER DATABASE
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
-app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///data.db"
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL", "sqlite:///data.db")
 db = SQLAlchemy(app)
 
 #CREATE TABLE for messages.db
@@ -56,7 +57,7 @@ class Submission(db.Model):
 with app.app_context():
     db.create_all()
 
-app.config['SECRET_KEY'] = 'jfhfcfcdxsx'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 
 class ContactForm(FlaskForm):

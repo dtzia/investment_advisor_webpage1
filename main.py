@@ -89,7 +89,7 @@ def check_contact_form_validity(contact_form):
         phone = contact_form.phone.data
         message = contact_form.message.data
         if not fullname or not phone or not email:
-            flash('Παρακαλώ συμπληρώστε όλα τα πεδία')
+            flash('Παρακαλώ συμπληρώστε όλα τα πεδία', 'error')
             return redirect(url_for('home'))
     return redirect(url_for('home'))
 

@@ -111,7 +111,7 @@ def home():
         submit_question = True
         flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', 'success')
 
-        return redirect(url_for('home', _anchor='question-section', submit_question=submit_question, submit_contact=submit_contact))
+        return redirect(url_for('home', _anchor='question-section'))
     if contact_form.validate_on_submit():
         fullname = contact_form.fullname.data
         email = contact_form.email.data
@@ -123,7 +123,7 @@ def home():
         submit_contact = True
         flash('Thank you for your message! We will contact you as soon as possible', 'success')
 
-        return redirect(url_for('home', _anchor='contact-section', submit_question=submit_question, submit_contact=submit_contact))
+        return redirect(url_for('home', _anchor='contact-section'))
 
     return render_template('form.html', form=contact_form, question_form=question_form, submit_question=submit_question, submit_contact=submit_contact)
 

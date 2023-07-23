@@ -106,6 +106,7 @@ def home():
         new_submission = Submission(fullname=name, email=email, phone=phone, question1=questions[0], question2=questions[1], question3=questions[2], question4=questions[3], question5=questions[4], question6=questions[5], question7=questions[6])
         db.session.add(new_submission)
         db.session.commit()
+        flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', 'success')
         return redirect(url_for('home'))
     if contact_form.validate_on_submit():
         fullname = contact_form.fullname.data

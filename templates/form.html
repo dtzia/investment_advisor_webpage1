@@ -244,6 +244,7 @@
             </div>
           </div>
           <div class="col-md-12">
+            {% if not submit %}
             {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-messages">
@@ -255,6 +256,7 @@
             </div>
         {% endif %}
     {% endwith %}
+            {% endif %}
   <div class="contact-form">
     <form id="contact" action="{{ url_for('home') }}" method="post" data-url="{{ url_for('home') }}">
       {{ form.csrf_token }}

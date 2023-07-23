@@ -231,7 +231,17 @@
             </div>
           </div>
           <div class="col-md-12">
-            {% if not thank_you %}
+            {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
   <div class="contact-form">
     <form id="contact" action="{{ url_for('home') }}" method="post">
       {{ form.csrf_token }}
@@ -275,12 +285,6 @@
       </div>
     </form>
   </div>
-            {% else %}
-            <div class="thank-you-message">
-      <h3>Thank you!</h3>
-      <p>We will get back to you as soon as possible.</p>
-    </div>
-            {% endif %}
 </div>
         </div>
       </div>

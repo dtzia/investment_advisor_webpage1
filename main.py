@@ -98,6 +98,7 @@ def home():
     contact_form = ContactForm()
     check_contact_form_validity(contact_form)
     question_form = QuestionsForm()
+    submit = False
     if question_form.validate_on_submit():
         name = question_form.not_member_name.data
         email = question_form.not_member_email.data
@@ -107,6 +108,7 @@ def home():
         db.session.add(new_submission)
         db.session.commit()
         flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', 'success')
+        submit = True
         return redirect(url_for('home'))
     if contact_form.validate_on_submit():
         fullname = contact_form.fullname.data
@@ -120,7 +122,7 @@ def home():
 
         return redirect(url_for('home'))
 
-    return render_template('form.html', form=contact_form, question_form=question_form)
+    return render_template('form.html', form=contact_form, question_form=question_form, submit=submit)
 
 
 if __name__ == "__main__":

@@ -63,6 +63,8 @@
           <div class="container">
             <div class="row justify-content-center align-items-center">
               <div class="col-md-8">
+                <div class="signup-form-wrapper" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; height: 500px; overflow-y: auto; margin-top: 50px;">
+                  {% if submit %}
                 {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="flash-messages">
@@ -74,7 +76,7 @@
             </div>
         {% endif %}
     {% endwith %}
-                <div class="signup-form-wrapper" style="background-color: rgba(255, 255, 255, 0.8); padding: 20px; border-radius: 10px; height: 500px; overflow-y: auto; margin-top: 50px;">
+                {% endif %}
                   <div class="text-center">
                     <h6 style="color: #a4c639;">Αξιολογηση Επενδυτικου προφιλ</h6>
                   </div>

@@ -117,7 +117,7 @@ def home():
         db.session.add(new_message)
         db.session.commit()
         thank_you = True
-        return redirect(url_for('home'))
+        #return redirect(url_for('home'))
     else:
         thank_you = False
 

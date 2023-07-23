@@ -1,6 +1,6 @@
 import os
 from flask_sqlalchemy import SQLAlchemy
-from flask import Flask, render_template, request, url_for, redirect, flash, jsonify
+from flask import Flask, render_template, url_for, redirect, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired, Email, InputRequired
@@ -107,7 +107,7 @@ def home():
         db.session.add(new_submission)
         db.session.commit()
         return redirect(url_for('home'))
-    if request.method == 'POST' and contact_form.validate_on_submit():
+    if contact_form.validate_on_submit():
         fullname = contact_form.fullname.data
         email = contact_form.email.data
         phone = contact_form.phone.data
@@ -116,7 +116,8 @@ def home():
         db.session.add(new_message)
         db.session.commit()
         flash('Thank you for your message! We will contact you as soon as possible', 'success')
-        return jsonify(success=True)
+
+        return redirect(url_for('home'))
 
     return render_template('form.html', form=contact_form, question_form=question_form)
 

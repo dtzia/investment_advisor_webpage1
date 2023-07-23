@@ -326,6 +326,7 @@
   });
 </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         $("#form-submit").click(function() {
@@ -338,17 +339,23 @@
                 url: url,
                 data: formData,
                 success: function(response) {
-                    // Handle the success response here, e.g., show a success message
-                    $(".flash-messages").html('<div class="flash-message alert alert-success" role="alert">Thank you for your submission</div>');
+                    if (response.success) {
+                        // If the response indicates success, show the success message
+                        $(".flash-messages").html('<div class="flash-message alert alert-success" role="alert">Thank you for your submission! We will contact you as soon as possible.</div>');
+                    } else {
+                        // If the response indicates an error, show the error message
+                        $(".flash-messages").html('<div class="flash-message alert alert-danger" role="alert">Please fill in all the required fields.</div>');
+                    }
                 },
                 error: function(response) {
-                    // Handle the error response here, e.g., show an error message
-                    $(".flash-messages").html('<div class="flash-message alert alert-danger" role="alert">Please fill in all the required fields</div>');
+                    // Handle any error that may occur during the AJAX request
+                    $(".flash-messages").html('<div class="flash-message alert alert-danger" role="alert">An error occurred. Please try again later.</div>');
                 }
             });
         });
     });
 </script>
+
 
 
   </body>

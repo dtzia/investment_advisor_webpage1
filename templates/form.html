@@ -243,7 +243,7 @@
         {% endif %}
     {% endwith %}
   <div class="contact-form">
-    <form id="contact" action="{{ url_for('home') }}" method="post">
+    <form id="contact" data-url="{{ url_for('home') }}">
       {{ form.csrf_token }}
       <div class="row">
         <div class="col-lg-4 col-md-12 col-sm-12">
@@ -325,6 +325,31 @@
     });
   });
 </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#form-submit").click(function() {
+            var form = $("#contact");
+            var url = form.data("url");
+            var formData = form.serialize();
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: formData,
+                success: function(response) {
+                    // Handle the success response here, e.g., show a success message
+                    $(".flash-messages").html('<div class="flash-message alert alert-success" role="alert">Thank you for your submission</div>');
+                },
+                error: function(response) {
+                    // Handle the error response here, e.g., show an error message
+                    $(".flash-messages").html('<div class="flash-message alert alert-danger" role="alert">Please fill in all the required fields</div>');
+                }
+            });
+        });
+    });
+</script>
+
 
   </body>
 </html>

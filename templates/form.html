@@ -243,7 +243,7 @@
         {% endif %}
     {% endwith %}
   <div class="contact-form">
-    <form id="contact" data-url="{{ url_for('home') }}">
+    <form id="contact" action="{{ url_for('home') }}" method="post" data-url="{{ url_for('home') }}">
       {{ form.csrf_token }}
       <div class="row">
         <div class="col-lg-4 col-md-12 col-sm-12">
@@ -325,11 +325,12 @@
     });
   });
 </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        $("#form-submit").click(function() {
+        $("#form-submit").click(function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
             var form = $("#contact");
             var url = form.data("url");
             var formData = form.serialize();
@@ -355,6 +356,7 @@
         });
     });
 </script>
+
 
 
 

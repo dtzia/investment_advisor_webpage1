@@ -116,8 +116,10 @@ def home():
         new_message = Message(fullname=fullname, email=email, phone=phone, message=message)
         db.session.add(new_message)
         db.session.commit()
-
+        thank_you = True
         return redirect(url_for('home'))
+    else:
+        thank_you = False
 
     return render_template('form.html', form=contact_form, question_form=question_form)
 

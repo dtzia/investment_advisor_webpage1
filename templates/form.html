@@ -231,6 +231,7 @@
             </div>
           </div>
           <div class="col-md-12">
+            {% if not thank_you %}
   <div class="contact-form">
     <form id="contact" action="{{ url_for('home') }}" method="post">
       {{ form.csrf_token }}
@@ -274,6 +275,12 @@
       </div>
     </form>
   </div>
+            {% else %}
+            <div class="thank-you-message">
+      <h3>Thank you!</h3>
+      <p>We will get back to you as soon as possible.</p>
+    </div>
+            {% endif %}
 </div>
         </div>
       </div>
@@ -286,7 +293,6 @@
         <div class="row">
           <div class="col-md-12">
             <p>Copyright &copy; Tziavras Dimitris 2023 Financial and Insurance advisor, NN Hellas.
-
             </p>
           </div>
         </div>

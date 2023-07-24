@@ -972,7 +972,13 @@ ul.slick-dots {
     max-width: 120px;
   }
 }
-
+.flash-messages {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%; /* Ensure the container takes full height */
+}
 /* Mobile Devices */
 @media (max-width: 768px) {
   /* Hide the sub-header on smaller devices */

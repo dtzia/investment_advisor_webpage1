@@ -105,7 +105,17 @@
   </div>
 </div>
     <!-- Banner Ends Here -->
-
+{% with messages = get_flashed_messages(category_filter=["question_success"]) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
     <div class="services">
       <div class="container">
         <div class="row">
@@ -233,11 +243,11 @@
           </div>
           <div id="contact-section">
           <div class="col-md-12">
-            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% with messages = get_flashed_messages(category_filter=["contact_success"]) %}
         {% if messages %}
             <div class="flash-messages">
-                {% for category, message in messages %}
-                    <div class="flash-message alert alert-{{ category }}" role="alert">
+                {% for message in messages %}
+                    <div class="flash-message alert alert-success" role="alert">
                         {{ message }}
                     </div>
                 {% endfor %}

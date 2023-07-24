@@ -56,7 +56,7 @@ class Submission(db.Model):
 with app.app_context():
     db.create_all()
 
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'mysecretkey')
 
 
 class ContactForm(FlaskForm):
@@ -106,8 +106,7 @@ def home():
         new_submission = Submission(fullname=name, email=email, phone=phone, question1=questions[0], question2=questions[1], question3=questions[2], question4=questions[3], question5=questions[4], question6=questions[5], question7=questions[6])
         db.session.add(new_submission)
         db.session.commit()
-        # submit_question = True
-        # flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', 'success')
+        flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', category='question_success')
 
         return redirect(url_for('home', _anchor='question-section'))
     if contact_form.validate_on_submit():
@@ -118,12 +117,11 @@ def home():
         new_message = Message(fullname=fullname, email=email, phone=phone, message=message)
         db.session.add(new_message)
         db.session.commit()
-        # submit_contact = True
-        flash('Thank you for your message! We will contact you as soon as possible', 'success')
+        flash('Thank you for your message! We will contact you as soon as possible', category='contact_success')
 
         return redirect(url_for('home', _anchor='contact-section'))
 
-    return render_template('form.html', form=contact_form, question_form=question_form, submit_question=submit_question, submit_contact=submit_contact)
+    return render_template('form.html', form=contact_form, question_form=question_form)
 
 
 if __name__ == "__main__":

@@ -98,8 +98,6 @@ def home():
     contact_form = ContactForm()
     check_contact_form_validity(contact_form)
     question_form = QuestionsForm()
-    submit_question = False
-    submit_contact = False
     if question_form.validate_on_submit():
         name = question_form.not_member_name.data
         email = question_form.not_member_email.data
@@ -108,8 +106,8 @@ def home():
         new_submission = Submission(fullname=name, email=email, phone=phone, question1=questions[0], question2=questions[1], question3=questions[2], question4=questions[3], question5=questions[4], question6=questions[5], question7=questions[6])
         db.session.add(new_submission)
         db.session.commit()
-        submit_question = True
-        flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', 'success')
+        # submit_question = True
+        # flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', 'success')
 
         return redirect(url_for('home', _anchor='question-section'))
     if contact_form.validate_on_submit():
@@ -120,7 +118,7 @@ def home():
         new_message = Message(fullname=fullname, email=email, phone=phone, message=message)
         db.session.add(new_message)
         db.session.commit()
-        submit_contact = True
+        # submit_contact = True
         flash('Thank you for your message! We will contact you as soon as possible', 'success')
 
         return redirect(url_for('home', _anchor='contact-section'))

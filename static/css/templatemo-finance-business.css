@@ -119,6 +119,37 @@ a.border-button:hover {
 	margin-right: 10px;
 	font-size: 18px;
 }
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+  background-color: #fff;
+  padding: 10px 0px;
+  margin-top: 20px;
+ }
+
+.navbar-heading {
+  margin-bottom: 0;
+}
+
+/* CSS for the "Financial Services" section */
+.services {
+  margin-top: 100px; /* Adjust this value as needed */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 767px) {
+  .navbar-heading {
+    font-size: 14px; /* Adjust this font size for smaller screens */
+  }
+
+  /* Adjust the margin-top for smaller screens */
+  .services {
+    margin-top: 160px; /* Adjust this value as needed */
+  }
+}
 
 .sub-header ul.left-info li a {
 	color: #fff;

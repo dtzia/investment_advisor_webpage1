@@ -4,7 +4,7 @@ from flask import Flask, render_template, url_for, redirect, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired, Email, InputRequired
-from flask_migrate import upgrade
+
 
 app = Flask(__name__)
 

@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, redirect, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired, Email, InputRequired
+from flask_migrate import upgrade
 
 app = Flask(__name__)
 
@@ -39,8 +40,9 @@ class Submission(db.Model):
     question5 = db.Column(db.String(1000))
     question6 = db.Column(db.String(1000))
     question7 = db.Column(db.String(1000))
+    question8 = db.Column(db.String(1000))
 
-    def __init__(self, fullname, phone, email, question1, question2, question3, question4, question5, question6, question7):
+    def __init__(self, fullname, phone, email, question1, question2, question3, question4, question5, question6, question7, question8):
         self.fullname = fullname
         self.email = email
         self.phone = phone
@@ -51,6 +53,7 @@ class Submission(db.Model):
         self.question5 = question5
         self.question6 = question6
         self.question7 = question7
+        self.question8 = question8
 
 
 with app.app_context():
@@ -73,11 +76,12 @@ class QuestionsForm(FlaskForm):
     not_member_phone = StringField('Τηλέφωνο επικοινωνίας', validators=[DataRequired()])
     question1 = SelectField(label='Ποιός λόγος σας οδηγεί στην ανάγκη συσσώρευσης κεφαλαίου;', choices=['Εξασφάλιση οικογένειας - Κάλυψη σπουδών', 'Εξασφάλιση Συμπληρωματικής Σύνταξης', 'Επένδυση διαθέσιμων κεφαλαίων & Προστασία εισοδήματος'], validators=[DataRequired()])
     question2 = IntegerField(label='Ποια είναι η χρονική διάρκεια των επενδύσεών σας; Πόσο καιρό σχεδιάζετε να κρατήσετε τα κεφάλαιά σας επενδυμένα;')
-    question3 = StringField('Ποια είναι η ανοχή σας στον κίνδυνο; Νιώθετε άνετα με την πιθανή αστάθεια και τις διακυμάνσεις στην αξία των επενδύσεών σας για κάποιο χρονικό διάστημα, ή προτιμάτε πιο σταθερές αποδόσεις;', validators=[DataRequired()])
-    question4 = StringField('Έχετε επενδύσει σε αμοιβαία κεφάλαια ή άλλα επενδυτικά μέσα στο παρελθόν(πχ. Ακίνητα); Αν ναι, ποιους τύπους επενδύσεων είχατε και πώς απέδοσαν;', validators=[DataRequired()])
-    question5 = StringField('Είστε εξοικειωμένος με την έννοια της διαφοροποίησης; Κατανοείτε τη σημασία της κατανομής των επενδύσεών σας σε διάφορα είδη περιουσιακών στοιχείων για τη διαχείριση του κινδύνου;', validators=[DataRequired()])
-    question6 = StringField('Έχετε κάποιες συγκεκριμένες επενδυτικές προτιμήσεις ή πεποιθήσεις; Για παράδειγμα, ενδιαφέρεστε για επενδύσεις φιλικές προς το περιβάλλον ή έχετε κάποιο συγκεκριμένο κλάδο ή βιομηχανία στην οποία θα θέλατε να επικεντρωθείτε;', validators=[DataRequired()])
-    question7 = StringField('Ποιά είναι η τρέχουσα οικονομική σας κατάσταση; Είστε σε θέση να αντέξετε πιθανές απώλειες για κάποιο μικρό χρονικό διάστημα, ή χρειάζεστε πιο σταθερές αποδόσεις για να επιτύχετε τους οικονομικούς σας στόχους;', validators=[DataRequired()])
+    question3 = IntegerField(label="Με βάση την παραπάνω χρονική διάρκεια που επιλέξατε, τι κεφάλαιο θα θέλατε να συσσωρεύσετε στο πέρας του συγκεκριμένου χρονικού διαστήματος;", validators=[DataRequired()])
+    question4 = StringField('Ποια είναι η ανοχή σας στον κίνδυνο; Νιώθετε άνετα με την πιθανή αστάθεια και τις διακυμάνσεις στην αξία των επενδύσεών σας για κάποιο χρονικό διάστημα, ή προτιμάτε πιο σταθερές αποδόσεις;', validators=[DataRequired()])
+    question5 = StringField('Έχετε επενδύσει σε αμοιβαία κεφάλαια ή άλλα επενδυτικά μέσα στο παρελθόν(πχ. Ακίνητα); Αν ναι, ποιους τύπους επενδύσεων είχατε και πώς απέδοσαν;', validators=[DataRequired()])
+    question6 = StringField('Είστε εξοικειωμένος με την έννοια της διαφοροποίησης; Κατανοείτε τη σημασία της κατανομής των επενδύσεών σας σε διάφορα είδη περιουσιακών στοιχείων για τη διαχείριση του κινδύνου;', validators=[DataRequired()])
+    question7 = StringField('Έχετε κάποιες συγκεκριμένες επενδυτικές προτιμήσεις ή πεποιθήσεις; Για παράδειγμα, ενδιαφέρεστε για επενδύσεις φιλικές προς το περιβάλλον ή έχετε κάποιο συγκεκριμένο κλάδο ή βιομηχανία στην οποία θα θέλατε να επικεντρωθείτε;', validators=[DataRequired()])
+    question8 = StringField('Ποιά είναι η τρέχουσα οικονομική σας κατάσταση; Είστε σε θέση να αντέξετε πιθανές απώλειες για κάποιο μικρό χρονικό διάστημα, ή χρειάζεστε πιο σταθερές αποδόσεις για να επιτύχετε τους οικονομικούς σας στόχους;', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 
@@ -102,8 +106,8 @@ def home():
         name = question_form.not_member_name.data
         email = question_form.not_member_email.data
         phone = question_form.not_member_phone.data
-        questions = [question_form['question' + str(i)].data for i in range(1, 8)]
-        new_submission = Submission(fullname=name, email=email, phone=phone, question1=questions[0], question2=questions[1], question3=questions[2], question4=questions[3], question5=questions[4], question6=questions[5], question7=questions[6])
+        questions = [question_form['question' + str(i)].data for i in range(1, 9)]
+        new_submission = Submission(fullname=name, email=email, phone=phone, question1=questions[0], question2=questions[1], question3=questions[2], question4=questions[3], question5=questions[4], question6=questions[5], question7=questions[6], question8=questions[7])
         db.session.add(new_submission)
         db.session.commit()
         flash('Thank you for your submission! We will contact you with your investment plan as soon as possible', category='question_success')

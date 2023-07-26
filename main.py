@@ -4,6 +4,7 @@ from flask import Flask, render_template, url_for, redirect, flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField, IntegerField, TextAreaField
 from wtforms.validators import DataRequired, Email, InputRequired
+import datetime
 
 
 app = Flask(__name__)
@@ -102,6 +103,7 @@ def home():
     contact_form = ContactForm()
     check_contact_form_validity(contact_form)
     question_form = QuestionsForm()
+    current_year = datetime.datetime.now().year
     if question_form.validate_on_submit():
         name = question_form.not_member_name.data
         email = question_form.not_member_email.data
@@ -125,7 +127,7 @@ def home():
 
         return redirect(url_for('home', _anchor='contact-section'))
 
-    return render_template('form.html', form=contact_form, question_form=question_form)
+    return render_template('form.html', form=contact_form, question_form=question_form, current_year=current_year)
 
 
 if __name__ == "__main__":

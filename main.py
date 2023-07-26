@@ -146,7 +146,7 @@ def home():
         new_member = Newsletter(fullname=fullname, email=email)
         db.session.add(new_member)
         db.session.commit()
-        flash('Thank you for your subscription!', category='subscription_success')
+        flash('Η εγγραφή σου ολοκληρώθηκε με επιτυχία!', category='subscription_success')
 
         return redirect(url_for('home', _anchor='newsletter-section'))
 

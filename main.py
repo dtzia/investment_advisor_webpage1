@@ -57,12 +57,25 @@ class Submission(db.Model):
         self.question8 = question8
 
 
+class Newsletter(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(150))
+
+    def __init__(self, fullname, email):
+        self.fullname = fullname
+        self.email = email
+
+
 with app.app_context():
     db.create_all()
 
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'mysecretkey')
 
-
+class NewsletterForm(FlaskForm):
+    fullname = StringField('Full Name', validators=[DataRequired()])
+    email = StringField('E-Mail Address', validators=[DataRequired(), Email()])
+    submit = SubmitField('Subscribe')
 class ContactForm(FlaskForm):
     fullname = StringField('Full Name', validators=[DataRequired()])
     email = StringField('E-Mail Address', validators=[DataRequired(), Email()])
@@ -103,6 +116,7 @@ def home():
     contact_form = ContactForm()
     check_contact_form_validity(contact_form)
     question_form = QuestionsForm()
+    newsletter_form = NewsletterForm()
     current_year = datetime.datetime.now().year
     if question_form.validate_on_submit():
         name = question_form.not_member_name.data
@@ -126,8 +140,17 @@ def home():
         flash('Thank you for your message! We will contact you as soon as possible', category='contact_success')
 
         return redirect(url_for('home', _anchor='contact-section'))
+    if newsletter_form.validate_on_submit():
+        fullname = newsletter_form.fullname.data
+        email = newsletter_form.email.data
+        new_member = Newsletter(fullname=fullname, email=email)
+        db.session.add(new_member)
+        db.session.commit()
+        flash('Thank you for your subscription!', category='subscription_success')
 
-    return render_template('form.html', form=contact_form, question_form=question_form, current_year=current_year)
+        return redirect(url_for('home', _anchor='newsletter-section'))
+
+    return render_template('form.html', form=contact_form, question_form=question_form, newsletter_form=newsletter_form, current_year=current_year)
 
 
 if __name__ == "__main__":

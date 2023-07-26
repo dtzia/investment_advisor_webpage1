@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="static/css/fontawesome.css">
     <link rel="stylesheet" href="static/css/templatemo-finance-business.css">
     <link rel="stylesheet" href="static/css/owl.css">
+    <link rel="stylesheet" href="static/css/subscription.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   </head>
@@ -298,6 +299,49 @@
         </div>
       </div>
     </div>
+      <!-- Subscription Section -->
+
+<div class="newsletter-section">
+  {% with messages = get_flashed_messages(category_filter=["subscription_success"]) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                    <div class="flash-message alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+  <div class="container" id="newsletter-section">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="section-heading">
+          <h2>Subscribe to Our Newsletter</h2>
+          <div class="subheading-content">
+            <p>Για συχνή ενημέρωση γύρω από την οικονομική επικαιρότητα, την κίνηση των αγορών και την απόδοση του χαρτοφυλακίου σας</p>
+          </div>
+        </div>
+        <div class="newsletter-form">
+          <form id="newsletter" action="{{ url_for('home') }}" method="post" data-url="{{ url_for('home') }}">
+          {{ form.csrf_token }}
+            <div class="form-group">
+              {{ form.fullname(class_='form-control', placeholder='Your Full Name', required='required') }}
+            </div>
+            <div class="form-group">
+              {{ form.email(class_='form-control', placeholder='Enter your email address', required='required') }}
+            </div>
+            <div class="form-group text-center">
+              {{ form.submit(class_='btn btn-primary', value='Subscribe') }}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
     <!-- Footer Starts Here -->
 
